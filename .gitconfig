@@ -1,0 +1,24 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Shingo Yamazaki
+	email = shingoyamazaki00@gmail.com
+[push]
+	default = simple
+[core]
+	editor = vim
+	quotepath = false
+	commentChar = >
+	excludesfile = /Users/yamazaki/.gitignore_global
+[credential]
+	helper = osxkeychain
+[alias]
+	st = status
+	fe = fetch --prune
+	graph = log --graph --date-order --all --pretty=format:'%h %Cred%d %Cgreen%ad %Cblue%cn %Creset%s' --date=short
+	delete-merged-branches = !git branch --merged | grep -v \\* | xargs -I % git branch -d %
+[hub]
+	protocol = https
+[url "https://"]
+	insteadOf = git://
+[ghq]
+    root = ~/repos

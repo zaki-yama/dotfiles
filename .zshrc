@@ -11,7 +11,7 @@ export XDG_CONFIG_HOME=~/.config
 # エイリアス
 alias la='ls -al'
 alias ll='ls -l'
-alias rm='rmtrash'
+alias rm='trash'
 alias mkdir='mkdir -p'
 
 #alias vim='nvim'

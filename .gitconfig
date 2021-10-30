@@ -22,3 +22,5 @@
 	insteadOf = git://
 [ghq]
     root = ~/repos
+[init]
+	defaultBranch = main

@@ -17,6 +17,7 @@ alias mkdir='mkdir -p'
 #alias vim='nvim'
 alias vi='vim'
 alias mvim='vim'
+alias beep='for i in {1..3}; do afplay /System/Library/Sounds/Ping.aiff; done'
 
 if [[ -x `which colordiff` ]]; then
   alias diff='colordiff'
@@ -280,3 +281,17 @@ fi
 ###-end-npm-completion-###
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+SFDX_AC_ZSH_SETUP_PATH=/Users/yamazaki/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH; # sfdx autocomplete setup
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# Wasmer
+export WASMER_DIR="/Users/yamazaki/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+eval "$(/Users/yamazaki/.local/bin/mise activate zsh)"

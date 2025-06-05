@@ -4,11 +4,12 @@
 	email = shingoyamazaki00@gmail.com
 [push]
 	default = simple
+	autoSetupRemote = true
 [core]
 	editor = vim
 	quotepath = false
 	commentChar = >
-	excludesfile = /Users/yamazaki/.gitignore_global
+	pager = less -x1,3
 [credential]
 	helper = osxkeychain
 [alias]

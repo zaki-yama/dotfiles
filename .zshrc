@@ -30,7 +30,7 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
-alias hb='hub browse'
+alias hb='gh browse'
 # ghq & fzf
 alias repos='ghq list -p | fzf --no-sort'
 alias repo='cd $(repos)'

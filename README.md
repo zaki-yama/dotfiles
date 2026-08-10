@@ -40,6 +40,22 @@ mise bootstrap dotfiles apply
 mise bootstrap dotfiles add --mode symlink --source <リポジトリ内の相対パス> <対象パス>
 ```
 
+### Homebrewパッケージ・macOS設定
+
+`[bootstrap.packages]`にHomebrewパッケージ、`[bootstrap.macos.defaults]`にmacOSの`defaults write`相当を宣言している（旧`Brewfile`/`setup.sh`はここに統合し削除した）。
+
+```bash
+# Homebrewパッケージのインストール状況確認・適用
+mise bootstrap packages status
+mise bootstrap packages apply
+
+# macOSのdefaults設定状況確認・適用
+mise bootstrap macos defaults status
+mise bootstrap macos defaults apply
+```
+
+`dotfiles`/`packages`/`macos defaults`をまとめて実行したい場合は`mise bootstrap`（フル実行）を使う。
+
 ## セットアップ（従来のスクリプト、代替手段）
 
 `mise`を使わない場合は`symlinks.sh`でも同じファイル群をシンボリックリンクできる。スクリプト自身の場所からリポジトリパスを解決するため、こちらもclone場所は任意。

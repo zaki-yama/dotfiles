@@ -1,91 +1,47 @@
 #!/bin/bash
+set -eu
+
+# スクリプト自身の場所からリポジトリのパスを動的に解決する（$HOME/dotfiles固定をやめる）
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# $1: リポジトリ内のソースパス（DOTFILES_DIRからの相対パス）
+# $2: リンク先の絶対パス
+# ソースが存在しない場合はスキップ。リンク先に「symlinkでない実ファイル」が
+# 既にある場合は上書きせず *.bak にリネームしてから貼り直す。
+link_file() {
+  local src="$DOTFILES_DIR/$1"
+  local dst="$2"
+
+  if [ ! -e "$src" ]; then
+    echo "[SKIP] $1 does not exist in dotfiles."
+    return
+  fi
+
+  mkdir -p "$(dirname "$dst")"
+
+  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    echo "[BACKUP] $dst -> $dst.bak"
+    mv "$dst" "$dst.bak"
+  fi
+
+  ln -snf "$src" "$dst"
+  echo "linked: $dst -> $src"
+}
 
 DOT_FILES=(
-.zshrc
-.vimrc
-.gvimrc
-.tmux.conf
-)
-
-CONFIG_FILES=(
-  pylintrc
-  pep8
-  flake8
+  .zshrc
+  .vimrc
+  .tmux.conf
+  .gitconfig
+  .ideavimrc
 )
 
 echo "### Create symbolic link under home directory..."
-for file in ${DOT_FILES[@]}
-do
-	if [ -e $HOME/dotfiles/$file ]; then
-		echo "ln -snf $HOME/dotfiles/$file $HOME/$file"
-		ln -snf $HOME/dotfiles/$file $HOME/$file
-	else
-		echo "[SKIP] $file does not exist."
-	fi
+for file in "${DOT_FILES[@]}"; do
+  link_file "$file" "$HOME/$file"
 done
 
 echo "### Create symbolic link under .config directory..."
-mkdir -p $HOME/.config
-for file in ${CONFIG_FILES[@]}
-do
-	if [ -e $HOME/dotfiles/config/$file ]; then
-		echo "ln -snf $HOME/dotfiles/config/$file $HOME/.config/$file"
-		ln -snf $HOME/dotfiles/config/$file $HOME/.config/$file
-	else
-		echo "[SKIP] $file does not exist."
-	fi
-done
-
-if [ -e $HOME/dotfiles/snippets ]; then
-	ln -snf $HOME/dotfiles/snippets $HOME/.vim/snippets
-fi
-
-if [ -e $HOME/dotfiles/ftdetect ]; then
-	ln -snf $HOME/dotfiles/ftdetect $HOME/.vim/ftdetect
-fi
-
-if [ -e $HOME/dotfiles/ftplugin ]; then
-	mkdir -p $HOME/.vim/after
-	ln -snf $HOME/dotfiles/ftplugin $HOME/.vim/after/ftplugin
-fi
-
-
-ln -snf $HOME/dotfiles/rc $HOME/.vim/rc
-
-# herdr
-mkdir -p $HOME/.config/herdr
-ln -snf $HOME/dotfiles/config/herdr/config.toml $HOME/.config/herdr/config.toml
-
-# ghostty
-mkdir -p $HOME/.config/ghostty
-ln -snf $HOME/dotfiles/config/ghostty/config $HOME/.config/ghostty/config
-
-# zsh completion
-echo "### [zsh] Create symbolic link under .zsh/completion directory..."
-if [ -e $HOME/dotfiles/zsh-completion ]; then
-  ln -snf $HOME/dotfiles/zsh-completion $HOME/.zsh/completion
-fi
-
-# for dein.vim
-if [ ! -e $HOME/dotfiles/dein ]; then
-  sh ./installer.sh dein
-fi
-
-# for Neovim
-mkdir -p $HOME/.config/nvim
-ln -snf $HOME/dotfiles/ftdetect $HOME/.config/nvim/ftdetect
-ln -snf $HOME/dotfiles/ftplugin $HOME/.config/nvim/ftplugin
-ln -snf $HOME/dotfiles/snippets $HOME/.config/nvim/snippets
-ln -snf $HOME/dotfiles/init.vim $HOME/.config/nvim/init.vim
-
-# zsh completion
-ln -snf $HOME/dotfiles/zsh $HOME/.zsh
-
-# install oh-my-zsh
-# [ ! -d ~/.oh-my-zsh ] && git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-# [ ! -d ~/.vim/bundle ] && mkdir -p ~/.vim/bundle && git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim && vim -c ':NeoBundleInstall'
-
-
-echo "### Installing anyenv..."
-git clone https://github.com/riywo/anyenv ~/.anyenv
+link_file "config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+link_file "config/ghostty/config" "$HOME/.config/ghostty/config"
+link_file "config/karabiner/karabiner.json" "$HOME/.config/karabiner/karabiner.json"

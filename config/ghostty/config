@@ -1,0 +1,5 @@
+# herdrへタブ操作系のキーを素通しするため、Ghostty標準のタブ切り替えを解除
+# unbind: バインドを削除し、印字可能なキーは子プロセス(herdr)まで送信されるようになる
+keybind = super+t=unbind
+keybind = super+shift+[=unbind
+keybind = super+shift+]=unbind

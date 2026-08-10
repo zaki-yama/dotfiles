@@ -175,19 +175,21 @@ git-change-all-commiter() {
 
 ###########################################
 # ログイン時にtmuxを自動起動
-if [ -z "$TMUX" -a -z "$STY" ]; then
-  if type tmuxx >/dev/null 2>&1; then
-    tmuxx
-  elif type tmux >/dev/null 2>&1; then
-    if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
-      tmux attach && echo "tmux attached session "
-    else
-      tmux new-session && echo "tmux created new session"
-    fi
-  elif type screen >/dev/null 2>&1; then
-    screen -rx || screen -D -RR
-  fi
-fi
+# herdr導入に伴い無効化（2026-08-10）。herdrがtmux相当の機能を代替するため、
+# 二重に多重化するとprefixキー(ctrl+b)が競合する。必要なら以下を復活させる。
+# if [ -z "$TMUX" -a -z "$STY" ]; then
+#   if type tmuxx >/dev/null 2>&1; then
+#     tmuxx
+#   elif type tmux >/dev/null 2>&1; then
+#     if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
+#       tmux attach && echo "tmux attached session "
+#     else
+#       tmux new-session && echo "tmux created new session"
+#     fi
+#   elif type screen >/dev/null 2>&1; then
+#     screen -rx || screen -D -RR
+#   fi
+# fi
 
 # ref. http://qiita.com/laiso/items/8a30e3656c980863ccfa
 propen() {
@@ -220,6 +222,14 @@ gc() {
 
 function to-gif() {
   ffmpeg -i $1 -filter_complex "[0:v] fps=10,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" output.gif
+}
+
+#######################################
+# git-wt
+alias gw='git wt'
+eval "$(git wt --init zsh)"
+wt() {
+  cd $(git-wt | fzf --header-lines=1 | awk '{if ($1 == "*") print $2; else print $1}')
 }
 
 ###-begin-npm-completion-###
@@ -295,3 +305,6 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 eval "$(/Users/yamazaki/.local/bin/mise activate zsh)"
+
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+alias k=kubectl

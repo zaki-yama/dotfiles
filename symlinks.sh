@@ -52,6 +52,14 @@ fi
 
 ln -snf $HOME/dotfiles/rc $HOME/.vim/rc
 
+# herdr
+mkdir -p $HOME/.config/herdr
+ln -snf $HOME/dotfiles/config/herdr/config.toml $HOME/.config/herdr/config.toml
+
+# ghostty
+mkdir -p $HOME/.config/ghostty
+ln -snf $HOME/dotfiles/config/ghostty/config $HOME/.config/ghostty/config
+
 # zsh completion
 echo "### [zsh] Create symbolic link under .zsh/completion directory..."
 if [ -e $HOME/dotfiles/zsh-completion ]; then

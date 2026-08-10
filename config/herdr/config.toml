@@ -4,7 +4,7 @@ onboarding = false
 delivery = "terminal"
 
 [experimental]
-switch_ascii_input_source_in_prefix = false
+switch_ascii_input_source_in_prefix = true
 
 [ui]
 agent_panel_sort = "spaces"

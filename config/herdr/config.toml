@@ -19,6 +19,7 @@ auto_switch = false
 new_tab = "cmd+t"
 next_tab = "cmd+shift+]"
 previous_tab = "cmd+shift+["
+close_tab = ["prefix+shift+x", "cmd+w"]
 
 # --- Workspace層（プロジェクト単位） ---
 # prefix+[ はcopy_modeのデフォルトと衝突するため、shift付きに変更

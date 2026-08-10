@@ -3,7 +3,5 @@
 "~/.config/herdr/config.toml" = { source = "config/herdr/config.toml", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "config/karabiner/karabiner.json", mode = "symlink" }
 "~/.gitconfig" = { source = ".gitconfig", mode = "symlink" }
-"~/.ideavimrc" = { source = ".ideavimrc", mode = "symlink" }
-"~/.tmux.conf" = { source = ".tmux.conf", mode = "symlink" }
 "~/.vimrc" = { source = ".vimrc", mode = "symlink" }
 "~/.zshrc" = { source = ".zshrc", mode = "symlink" }

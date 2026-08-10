@@ -31,9 +31,7 @@ link_file() {
 DOT_FILES=(
   .zshrc
   .vimrc
-  .tmux.conf
   .gitconfig
-  .ideavimrc
 )
 
 echo "### Create symbolic link under home directory..."

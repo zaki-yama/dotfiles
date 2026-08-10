@@ -4,3 +4,8 @@ keybind = super+t=unbind
 keybind = super+shift+[=unbind
 keybind = super+shift+]=unbind
 keybind = super+w=unbind
+
+# リガチャを無効化
+font-feature = "-calt"
+font-feature = "-dlig"
+font-feature = "-liga"

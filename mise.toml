@@ -1,6 +1,8 @@
 [bootstrap.packages]
 "brew:ghq" = "latest"
 "brew:trash" = "latest"
+"brew:herdr" = "latest"
+"brew-cask:ghostty" = "latest"
 
 [bootstrap.macos.defaults]
 "com.apple.screencapture" = { disable-shadow = true, location = "~/Desktop/Screenshots", name = "SS" }

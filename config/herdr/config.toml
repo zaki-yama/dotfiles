@@ -15,12 +15,6 @@ name = "catppuccin"
 auto_switch = false
 
 [keys]
-# --- Tab層（Workspace内の画面。Chromeのタブ相当） ---
-new_tab = "cmd+t"
-next_tab = "cmd+shift+]"
-previous_tab = "cmd+shift+["
-close_tab = ["prefix+shift+x", "cmd+w"]
-
 # --- Workspace層（プロジェクト単位） ---
 # prefix+[ はcopy_modeのデフォルトと衝突するため、shift付きに変更
 previous_workspace = "prefix+shift+["
@@ -28,8 +22,11 @@ next_workspace = "prefix+shift+]"
 switch_workspace = "prefix+shift+1..9"
 workspace_picker = ["prefix+w", "prefix+h"]
 
-# --- コピー(tmuxのvisual選択相当) ---
-copy_mode = "prefix+["
+# --- Tab層（Workspace内の画面。Chromeのタブ相当） ---
+new_tab = "cmd+t"
+next_tab = "cmd+shift+]"
+previous_tab = "cmd+shift+["
+close_tab = ["prefix+shift+x", "cmd+w"]
 
 # --- Pane層（Tab内の分割ターミナル） ---
 # 方向移動(focus_pane_left/down/up/right)はh/j/lをレイヤー横断ジャンプに
@@ -42,6 +39,9 @@ last_pane = ["prefix+;", "prefix+l"]
 previous_agent = "prefix+shift+k"
 next_agent = ["prefix+shift+j", "prefix+j"]
 focus_agent = "prefix+alt+1..9"
+
+# --- コピー(tmuxのvisual選択相当) ---
+copy_mode = "prefix+["
 
 # --- レイヤー横断のジャンプ ---
 goto = "prefix+g"

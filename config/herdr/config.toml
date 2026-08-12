@@ -15,12 +15,12 @@ name = "catppuccin"
 auto_switch = false
 
 [keys]
+prefix = "ctrl+t"
+
 # --- Workspace層（プロジェクト単位） ---
-# prefix+[ はcopy_modeのデフォルトと衝突するため、shift付きに変更
 previous_workspace = "prefix+shift+["
 next_workspace = "prefix+shift+]"
 switch_workspace = "prefix+shift+1..9"
-workspace_picker = ["prefix+w", "prefix+h"]
 
 # --- Tab層（Workspace内の画面。Chromeのタブ相当） ---
 new_tab = "cmd+t"
@@ -42,9 +42,6 @@ focus_agent = "prefix+alt+1..9"
 
 # --- コピー(tmuxのvisual選択相当) ---
 copy_mode = "prefix+["
-
-# --- レイヤー横断のジャンプ ---
-goto = "prefix+g"
 
 # --- Navigate mode内の移動（prefix+wで入るワークスペース選択面） ---
 # j/kでworkspace選択を上下に動かす。衝突するnavigate_pane_down/upは外し、

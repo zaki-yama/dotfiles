@@ -9,3 +9,7 @@ keybind = super+w=unbind
 font-feature = "-calt"
 font-feature = "-dlig"
 font-feature = "-liga"
+
+window-padding-x = 20
+window-padding-y = 50
+window-padding-balance = true

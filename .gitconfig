@@ -26,3 +26,5 @@
     root = ~/repos
 [init]
 	defaultBranch = main
+[include]
+	path = .gitconfig.local

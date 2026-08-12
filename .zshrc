@@ -173,6 +173,43 @@ git-change-all-commiter() {
   git filter-branch -f --env-filter "GIT_AUTHOR_NAME='Shingo Yamazaki'; GIT_AUTHOR_EMAIL='shingoyamazaki00@gmail.com'; GIT_COMMITTER_NAME='Shingo Yamazaki'; GIT_COMMITTER_EMAIL='shingoyamazaki00@gmail.com';" HEAD
 }
 
+##################################################
+# git のブランチを探しやすくする
+# ref. https://www.mizdra.net/entry/2024/10/19/172323
+fmt="\
+%(refname)|\
+%(refname:short)|\
+%(committerdate:relative)|\
+%(subject)"
+function select-git-branch-friendly() {
+  selected_branch=$(
+    git branch -a --sort=-committerdate --format=$fmt \
+    | awk -F'|' '{
+        if ($1 ~ /^refs\/remotes\//) color="\033[36m"
+        else color="\033[0m"
+        printf "%s%s\033[0m|%s|%s\n", color, $2, $3, $4
+      }' \
+    | column -ts'|' \
+    | fzf --ansi --exact --preview='git log --oneline --graph --decorate --color=always -50 {+1}' \
+    | awk -v remotes="$(git remote | tr '\n' '|')" '{
+        branch=$1
+        n=split(remotes, r, "|")
+        for (i=1; i<=n; i++) {
+          if (r[i] != "" && index(branch, r[i] "/") == 1) {
+            sub(r[i] "/", "", branch)
+            break
+          }
+        }
+        print branch
+      }' \
+  )
+  BUFFER="${LBUFFER}${selected_branch}${RBUFFER}"
+  CURSOR=$#LBUFFER+$#selected_branch
+  zle redisplay
+}
+zle -N select-git-branch-friendly
+bindkey '^g' select-git-branch-friendly
+
 ###########################################
 # ログイン時にtmuxを自動起動
 # herdr導入に伴い無効化（2026-08-10）。herdrがtmux相当の機能を代替するため、

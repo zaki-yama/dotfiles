@@ -34,6 +34,10 @@ alias hb='gh browse'
 # ghq & fzf
 alias repos='ghq list -p | fzf --no-sort'
 alias repo='cd $(repos)'
+alias gw='git wt'
+
+# Macの音声入力リセット
+alias voice_reset="ps aux | grep '[s]peech' | awk '{print $2}' | xargs kill -9"
 
 # 重複パスを登録しない
 # @see http://yonchu.hatenablog.com/entry/20120415/1334506855
@@ -256,6 +260,15 @@ gc() {
     fzf |
     xargs git checkout
 }
+
+#####################################
+# git-wt
+eval "$(git wt --init zsh)"
+
+wt() {
+  cd $(git-wt | fzf --header-lines=1 | awk '{if ($1 == "*") print $2; else print $1}')
+}
+###
 
 function to-gif() {
   ffmpeg -i $1 -filter_complex "[0:v] fps=10,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" output.gif

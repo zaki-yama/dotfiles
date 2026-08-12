@@ -19,7 +19,7 @@ rows = [
 
 
 [theme]
-name = "catppuccin"
+name = "dracula"
 auto_switch = false
 
 [keys]

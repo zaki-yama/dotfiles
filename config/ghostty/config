@@ -5,7 +5,6 @@ keybind = super+shift+[=unbind
 keybind = super+shift+]=unbind
 keybind = super+w=unbind
 
-font-family = Monaco
 
 # リガチャを無効化
 font-feature = "-calt"

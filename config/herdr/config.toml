@@ -46,8 +46,8 @@ cycle_pane_previous = "prefix+shift+tab"
 last_pane = ["prefix+;", "prefix+l"]
 
 # --- Agent層（サイドバーのプロセス一覧） ---
-previous_agent = "prefix+shift+k"
-next_agent = ["prefix+shift+j", "prefix+j"]
+previous_agent = "prefix+k"
+next_agent = "prefix+j"
 focus_agent = "prefix+alt+1..9"
 
 # --- コピー(tmuxのvisual選択相当) ---

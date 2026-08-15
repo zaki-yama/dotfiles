@@ -50,9 +50,6 @@ previous_agent = "prefix+k"
 next_agent = "prefix+j"
 focus_agent = "prefix+alt+1..9"
 
-# --- コピー(tmuxのvisual選択相当) ---
-copy_mode = "prefix+["
-
 # --- Navigate mode内の移動（prefix+wで入るワークスペース選択面） ---
 # j/kでworkspace選択を上下に動かす。衝突するnavigate_pane_down/upは外し、
 # pane方向ジャンプはh/lの左右のみ残す。

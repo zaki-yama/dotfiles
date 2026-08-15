@@ -12,7 +12,7 @@
 run = "killall Finder SystemUIServer || true"
 
 [dotfiles]
-"~/.config/ghostty/config" = { source = "config/ghostty/config", mode = "symlink" }
+"~/.config/ghostty/config.ghostty" = { source = "config/ghostty/config.ghostty", mode = "symlink" }
 "~/.config/herdr/config.toml" = { source = "config/herdr/config.toml", mode = "symlink" }
 "~/.config/karabiner/karabiner.json" = { source = "config/karabiner/karabiner.json", mode = "symlink" }
 "~/.gitconfig" = { source = ".gitconfig", mode = "symlink" }

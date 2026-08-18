@@ -36,8 +36,10 @@ alias repos='ghq list -p | fzf --no-sort'
 alias repo='cd $(repos)'
 alias gw='git wt'
 
-# Macの音声入力リセット
-alias voice_reset="ps aux | grep '[s]peech' | awk '{print $2}' | xargs kill -9"
+# Macの音声入力リセット（自分所有のspeechプロセスのみkill。システム所有のcorespeechd_systemは対象外）
+voice_reset() {
+  ps aux | grep '[s]peech' | awk -v u="$USER" '$1==u {print $2}' | xargs kill -9
+}
 
 # 重複パスを登録しない
 # @see http://yonchu.hatenablog.com/entry/20120415/1334506855
